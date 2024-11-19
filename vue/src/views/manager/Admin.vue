@@ -1,7 +1,49 @@
 <template>
   <div>
+    <div class="class" style="margin-bottom: 5px">
+      <el-input v-model = "data.name"  prefix-icon="Search" style="width: 240px;margin-right: 10px" placeholder="请输入名称查询"></el-input>
+      <el-button type="info" plain @click="load">查询</el-button>
+      <el-button type="warning" style="margin:0 10px " plain @click="reset">重置</el-button>
+
+    </div>
+
     <div class = "card">
       <el-button type="primary" plain @click="handleAdd">新增</el-button>
+      <el-button type="danger" plain @click="delBatch">批量删除</el-button>
+    </div>
+
+
+    <div class = "card" style="margin-bottom: 5px">
+<!--      当选择框发生变化的时候执行handleSelectionChange-->
+      <el-table stripe :data="data.tableData" @selection-change="handleSelectionChange">
+        <el-table-column type="selection" width="50"/>
+        <el-table-column prop="username" label="账号"/>
+        <el-table-column prop="avatar" label="头像">
+          <template v-slot="scope">
+            <el-image style="width: 40px; height: 40px; border-radius: 50%; display: block" v-if="scope.row.avatar"
+                      :src="scope.row.avatar" :preview-src-list="[scope.row.avatar]" preview-teleported></el-image>
+          </template>
+        </el-table-column>
+        <el-table-column prop="name" label="姓名"/>
+        <el-table-column prop="role" label="角色"/>
+        <el-table-column prop="phone" label="手机号"/>
+        <el-table-column prop="email" label="邮箱"/>
+        <el-table-column label = "操作" width="100" fixed="right">
+          <template v-slot="scope">
+            <el-button type="primary" circle :icon="Edit" @click="handleEdit(scope.row)"></el-button>
+            <el-button type="danger" circle :icon="Delete" @click="handleDelete(scope.row.id)"></el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+
+    <div class = "card" v-if="data.total">
+      <el-pagination @current-change="load"
+                     background layout="prev,pager,next"
+                     :page-size="data.pageSize"
+                     v-model:current-page="data.pageNum"
+                     :total="data.total"
+      ></el-pagination>
     </div>
 
     <el-dialog title="管理员信息" v-model="data.formVisible" width="40%" destroy-on-close>
@@ -9,9 +51,18 @@
         <el-form-item prop="username" label="用户名">
           <el-input v-model="data.form.username" placeholder="请输入用户名"></el-input>
         </el-form-item>
+
+
         <el-form-item prop="avatar" label="头像">
-          <el-input v-model="data.form.avatar" placeholder="请输入头像"></el-input>
+          <el-upload
+              :action="baseUrl + '/files/upload'"
+              :on-success="handleFileUpload"
+              list-type="picture"
+          >
+            <el-button type="primary">点击上传</el-button>
+          </el-upload>
         </el-form-item>
+
         <el-form-item prop="name" label="姓名">
           <el-input v-model="data.form.name" placeholder="请输入姓名"></el-input>
         </el-form-item>
@@ -30,36 +81,129 @@
       </template>
     </el-dialog>
 
-
   </div>
 </template>
 
 
 <script setup>
 import {reactive} from "vue";
-import {ElMessage} from "element-plus";
+import {ElMessage, ElMessageBox} from "element-plus";
 import request from "@/utils/request.js";
+import {Delete, Edit} from "@element-plus/icons-vue";
+
+
+const baseUrl = import.meta.env.FILE_BASE_URL
 
 const data = reactive({
   formVisible: false,
-  form: {}
+  form: {},
+  tableData: [],
+  pageNum : 1,
+  pageSize:10,
+  total:0,
+  name:null,
+  ids:[],
 })
+
+const load = ()=>{
+  request.get('/admin/selectPage',{
+    params:{
+      pageNum:data.pageNum,
+      pageSize:data.pageSize,
+      name:data.name
+    }
+  }).then(res => {
+    if(res.code === '200'){
+      data.tableData= res.data?.list || []
+      data.total = res.data?.total
+    }
+  })
+}
+
 const handleAdd = () => {
   data.form = {}
   data.formVisible = true
+
 }
+
+const handleEdit = (row) => {
+  data.form = JSON.parse(JSON.stringify(row))
+  data.formVisible = true
+}
+const handleDelete = (id)=>{
+  ElMessageBox.confirm('删除后数据无法恢复，您确定删除吗？', '删除确认', { type: 'warning' }).then(res => {
+    request.delete('/admin/delete/' + id).then(res => {
+      if (res.code === '200') {
+        ElMessage.success("删除成功")
+        load()
+      } else {
+        ElMessage.error(res.msg)
+      }
+    })
+  }).catch(err => {
+    console.error(err)
+  })
+}
+
+const delBatch = ()=>{
+  if(!data.ids.length){
+    ElMessage.warning("請選擇刪除項")
+  }
+  else{
+    ElMessageBox.confirm('删除后数据无法恢复，您确定删除吗？', '删除确认', { type: 'warning' }).then(res => {
+      request.delete('/admin/delete/batch',{data:data.ids}).then(res => {
+        if (res.code === '200') {
+          ElMessage.success("删除成功")
+          load()
+        } else {
+          ElMessage.error(res.msg)
+        }
+      })
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+}
+
+const handleSelectionChange = (rows)=>{
+  data.ids = rows.map(v=> v.id)
+  console.log(data.ids)
+}
+
 const add = () => {
   request.post('/admin/add', data.form).then(res => {
     if (res.code === '200') {
       ElMessage.success('操作成功')
       data.formVisible = false
+      load()
     } else {
       ElMessage.error(res.msg)
     }
   })
 }
 
-const save = () => {
-  add()
+const update = ()=>{
+  request.put("admin/update" ,data.form).then(res => {
+    if(res.code === '200'){
+      ElMessage.success("操作成功")
+      data.formVisible=false
+      load()
+    }
+  })
 }
+const save = () => {
+  data.form.id ? update() : add()
+}
+
+const handleFileUpload = (res)=>{
+  data.form.avatar = res.data
+  console.log(data.form)
+}
+
+
+const reset=()=>{
+  data.name=null
+  load()
+}
+load()
 </script>

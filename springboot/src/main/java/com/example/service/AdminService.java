@@ -1,32 +1,28 @@
 package com.example.service;
 
-import cn.hutool.core.util.ObjectUtil;
-import com.example.common.Constants;
-import com.example.common.enums.ResultCodeEnum;
-import com.example.common.enums.RoleEnum;
+import com.example.entity.Account;
 import com.example.entity.Admin;
-import com.example.exception.CustomException;
-import com.example.mapper.AdminMapper;
-import jakarta.annotation.Resource;
-import org.springframework.stereotype.Service;
+import com.github.pagehelper.PageInfo;
 
-@Service
-public class AdminService {
+import java.util.List;
 
-    @Resource
-    private AdminMapper adminMapper;
-    public void add(Admin admin){
-        Admin dbAdmin = adminMapper.selectByUsername(admin.getUsername());
-        if(ObjectUtil.isNotNull(dbAdmin)){
-            throw new CustomException(ResultCodeEnum.USER_EXIST_ERROR);
-        }
-        if(ObjectUtil.isEmpty(admin.getPassword())){
-            admin.setPassword(Constants.USER_DEFAULT_PASSWORD);
-        }
-        admin.setRole(RoleEnum.ADMIN.name());
-        if(ObjectUtil.isEmpty(admin.getName())){
-            admin.setName(admin.getUsername());
-        }
-        adminMapper.insert(admin);
-    }
+/**
+ * 业务层
+ */
+public interface AdminService {
+
+    public void add(Admin admin);
+    public Admin selectById(Integer id);
+
+    public List<Admin> selectAll(Admin admin);
+
+    PageInfo<Admin> selectPage(Admin admin , Integer pageNum, Integer pageSize);
+
+    void updateById(Admin admin);
+
+    void deleteById(Integer id);
+
+    void deleteBatch(List<Integer> ids);
+
+    Account login(Account account);
 }

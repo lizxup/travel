@@ -1,6 +1,6 @@
 package com.example.entity;
 
-public class Admin extends Acount{
+public class Admin extends Account {
     /** 主键ID */
     private Integer id;
 
