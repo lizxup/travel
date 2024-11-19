@@ -100,4 +100,17 @@ public class AdminServiceImpl implements AdminService {
         dbAdmin.setToken(token);
         return dbAdmin;
     }
+
+    @Override
+    public void updatePassword(Account account) {
+        Admin dbAdmin = adminMapper.selectByUsername(account.getUsername());
+        if (ObjectUtil.isNull(dbAdmin)) {
+            throw new CustomException(ResultCodeEnum.USER_NOT_EXIST_ERROR);
+        }
+        if (!account.getPassword().equals(dbAdmin.getPassword())) {
+            throw new CustomException(ResultCodeEnum.PARAM_PASSWORD_ERROR);
+        }
+        dbAdmin.setPassword(account.getNewPassword());
+        adminMapper.updateById(dbAdmin);
+    }
 }

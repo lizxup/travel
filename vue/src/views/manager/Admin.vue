@@ -92,7 +92,7 @@ import request from "@/utils/request.js";
 import {Delete, Edit} from "@element-plus/icons-vue";
 
 
-const baseUrl = import.meta.env.FILE_BASE_URL
+const baseUrl = import.meta.env.VITE_BASE_URL
 
 const data = reactive({
   formVisible: false,

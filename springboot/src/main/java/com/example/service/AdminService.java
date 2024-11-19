@@ -25,4 +25,6 @@ public interface AdminService {
     void deleteBatch(List<Integer> ids);
 
     Account login(Account account);
+
+    void updatePassword(Account account);
 }

@@ -21,12 +21,12 @@
         <el-dropdown style = "cursor : pointer">
           <div style="padding-right: 20px; display: flex; align-items: center">
             <img style ="width: 40px; height: 40px ; border-radius: 50% ;" :src="data.user.avatar" alt="">
-            <span style = "margin-left: 5px; color: white">{{data.user.name}}</span>
+            <span style="margin-left: 5px; color: white">{{ data.user.name }}</span><el-icon color="#fff"><arrow-down/></el-icon>
           </div>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item>个人资料</el-dropdown-item>
-              <el-dropdown-item>修改密码</el-dropdown-item>
+              <el-dropdown-item @click = "router.push('/manager/person')">个人资料</el-dropdown-item>
+              <el-dropdown-item @click = "router.push('/manager/password')">修改密码</el-dropdown-item>
               <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </template>
@@ -66,7 +66,7 @@
 
       </div>
       <div class = "manager-main-right">
-        <RouterView/>
+        <RouterView @updateUser='updateUser'/>
       </div>
     </div>
     <!--    主体结束   -->
@@ -87,6 +87,10 @@ const data = reactive({
 const logout = ()=>{
   router.push('/login');
   localStorage.removeItem("userData")
+}
+
+const updateUser = ()=>{
+  data.user = JSON.parse(localStorage.getItem("userData") || "{}")
 }
 
 if(!data.user.id){
