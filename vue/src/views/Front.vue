@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="front-notice"><el-icon><Bell/></el-icon>公告：{{ data.top }}</div>
     <div class="front-header">
       <div class="front-header-left">
         <img src="@/assets/imgs/logo.jpg" alt="">
@@ -41,9 +42,11 @@
 <script setup>
 import router from "@/router/index.js";
 import { reactive } from "vue";
+import request from "@/utils/request.js";
 
 const data = reactive({
-  user: JSON.parse(localStorage.getItem('userData') || '{}')
+  user: JSON.parse(localStorage.getItem('userData') || '{}'),
+  top:'',
 })
 
 const logout = ()=>{
@@ -54,6 +57,24 @@ const logout = ()=>{
 const updateUser = ()=>{
   data.user = JSON.parse(localStorage.getItem("userData") || "{}")
 }
+
+const loadNotice = () => {
+  request.get('/notice/selectAll').then(res => {
+    data.noticeData = res.data
+    let i = 0
+    if (data.noticeData && data.noticeData.length) {
+      data.top = data.noticeData[0].content
+      setInterval(() => {
+        data.top = data.noticeData[i].content
+        i++
+        if (i === data.noticeData.length) {
+          i = 0
+        }
+      }, 5000)
+    }
+  })
+}
+loadNotice()
 </script>
 
 <style scoped>

@@ -3,12 +3,14 @@ package com.example.service;
 import com.example.entity.Account;
 import com.example.entity.Admin;
 import com.github.pagehelper.PageInfo;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * 业务层
  */
+
 public interface AdminService {
 
     public void add(Admin admin);

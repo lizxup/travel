@@ -47,3 +47,11 @@
 .el-tooltip__trigger {
     outline: none;
 }
+
+.front-notice {
+    padding: 5px 20px;
+    color: #666;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
