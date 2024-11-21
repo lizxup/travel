@@ -24,7 +24,7 @@
             <el-button @click="preview(scope.row.content)">查看内容</el-button>
           </template>
         </el-table-column>
-        <el-table-column prop="userName" label="发布人" />
+        <el-table-column prop="username" label="发布人" />
         <el-table-column prop="time" label="发布时间" />
         <el-table-column prop="readCount" label="阅读量" />
         <el-table-column prop="startDate" label="出行日期" />

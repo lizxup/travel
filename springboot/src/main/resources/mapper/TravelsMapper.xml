@@ -4,9 +4,10 @@
 <mapper namespace="com.example.mapper.TravelsMapper">
 
     <select id="selectAll" resultType="com.example.entity.Travels">
-        select * from `travels`
+        select travels.*,user.name as userName  from `travels`
+        left join user on travels.user_id = user.id
         <where>
-            <if test="title != null"> and title like concat('%', #{title}, '%')</if>
+            <if test="title != null"> and travels.title like concat('%', #{title}, '%')</if>
         </where>
     </select>
 
@@ -92,5 +93,7 @@
         </set>
         where id = #{id}
     </update>
+
+
 
 </mapper>
