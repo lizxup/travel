@@ -14,6 +14,7 @@ const router = createRouter({
         {path: "password", meta:{name:"修改密码"} , component:()=>import("@/views/manager/Password.vue"),},
         {path: "notice", meta:{name:"系统公告"} , component:()=>import("@/views/manager/Notice.vue"),},
         {path: "article", meta:{name:"旅游攻略"} , component:()=>import("@/views/manager/Article.vue"),},
+        {path: "routes", meta:{name:"旅游路线"} , component:()=>import("@/views/manager/Routes.vue"),},
         ]
     },
     {path:'/login',component:()=>import('@/views/login.vue')},
