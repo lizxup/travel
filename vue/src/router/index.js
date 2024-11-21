@@ -12,7 +12,8 @@ const router = createRouter({
         {path: "admin", meta:{name:"管理员信息"} , component:()=>import("@/views/manager/Admin.vue"),},
         {path: "person", meta:{name:"个人资料"} , component:()=>import("@/views/manager/Person.vue"),},
         {path: "password", meta:{name:"修改密码"} , component:()=>import("@/views/manager/Password.vue"),},
-        {path: "notice", meta:{name:"系统公告"} , component:()=>import("@/views/manager/notice.vue"),},
+        {path: "notice", meta:{name:"系统公告"} , component:()=>import("@/views/manager/Notice.vue"),},
+        {path: "article", meta:{name:"旅游攻略"} , component:()=>import("@/views/manager/Article.vue"),},
         ]
     },
     {path:'/login',component:()=>import('@/views/login.vue')},
