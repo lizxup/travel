@@ -11,7 +11,7 @@
  Target Server Version : 80402 (8.4.2)
  File Encoding         : 65001
 
- Date: 22/11/2024 05:39:40
+ Date: 22/11/2024 10:59:46
 */
 
 SET NAMES utf8mb4;
@@ -128,7 +128,7 @@ CREATE TABLE `travels`  (
 -- ----------------------------
 -- Records of travels
 -- ----------------------------
-INSERT INTO `travels` VALUES (1, 'zheshi', NULL, 'sadfsdaf', 'adsfasdfmmmmmmmmmmmmmm', NULL, '', NULL, NULL, NULL, NULL, NULL, '拒绝');
+INSERT INTO `travels` VALUES (1, 'zheshi', NULL, 'sadfsdaf', 'adsfasdfmmmmmmmmmmmmmm', 1, '', NULL, NULL, NULL, NULL, NULL, '拒绝');
 
 -- ----------------------------
 -- Table structure for user
@@ -145,10 +145,13 @@ CREATE TABLE `user`  (
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '邮箱',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `username`(`username` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '用户信息' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '用户信息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES (1, 'lzx', '123456', 'v', 'http://localhost:9091/files/download/1732226004927-游记.png', 'USER', '17766667777', NULL);
+INSERT INTO `user` VALUES (3, 'qqq', '123456', 'dzsf', NULL, 'USER', NULL, NULL);
+INSERT INTO `user` VALUES (4, 'llll', '123456', 'as', NULL, 'USER', NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

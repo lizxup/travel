@@ -6,7 +6,7 @@
 
       <div class = "manager-header-left">
         <img src="@/assets/imgs/logo.jpg" alt="">
-        <div class = "title">管理系统</div>
+        <div class = "title">后台管理</div>
       </div>
 
       <div class = "manager-header-center">
@@ -65,7 +65,7 @@
               <span>用户管理</span>
             </template>
             <el-menu-item index="/manager/admin">管理员信息</el-menu-item>
-            <el-menu-item index="/manager/user">普通用户信息</el-menu-item>
+            <el-menu-item index="/manager/user">用户信息</el-menu-item>
           </el-sub-menu>
         </el-menu>
 
