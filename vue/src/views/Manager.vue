@@ -102,6 +102,9 @@ if(!data.user.id){
   logout()
   ElMessage.error("请登录！")
 }
+if(data.user.role != "ADMIN"){
+  location.href="/login"
+}
 
 </script>
 

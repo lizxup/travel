@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <div class="login-box">
-      <div style="font-weight: bold; font-size: 24px; text-align: center; margin-bottom: 30px; color: #189500">欢 迎 登 录</div>
+      <div style="font-weight: bold; font-size: 24px; text-align: center; margin-bottom: 30px; color: #076bdc">管 理 员 登 录</div>
       <el-form ref="formRef" :model="data.form" :rules="data.rules">
         <el-form-item prop="username">
           <el-input :prefix-icon="User" size="large" v-model="data.form.username" placeholder="请输入账号"></el-input>
@@ -10,12 +10,8 @@
           <el-input show-password :prefix-icon="Lock" size="large" v-model="data.form.password" placeholder="请输入密码"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button size="large" type="primary" style="width: 100%" @click="login">登 录</el-button>
+          <el-button size="large" type="primary" style="width: 100%; background-color: #076bdc" @click="login">登 录</el-button>
         </el-form-item>
-        <div style="display: flex" >
-          <a style="color: #189500" href="/adminLogin">管理员登录</a>
-          <div style="flex: 1; text-align: right">还没有账号？请 <a href="/register" style="color:#189500;">注册</a></div>
-        </div>
       </el-form>
     </div>
   </div>
@@ -29,7 +25,7 @@ import {ElMessage} from "element-plus";
 import router from "@/router/index.js";
 
 const data = reactive({
-  form: { role: 'USER' },
+  form: { role: 'ADMIN' },
   rules: {
     username: [
       // trigger: 'blur' 表示失焦校验
@@ -51,7 +47,7 @@ const login = () => {
           ElMessage.success('登录成功')
           // 存储用户信息到浏览器的缓存
           localStorage.setItem('userData', JSON.stringify(res.data))
-          router.push('/front/home')
+          router.push('/manager/home')
         }else{
           ElMessage.error(res.msg)
         }
@@ -70,8 +66,8 @@ const login = () => {
   display: flex;
   justify-content: center;
   align-items:center;
-  background-image:url("@/assets/imgs/loginBackground.png");
-  background-size: cover;
+  background: linear-gradient(to top, #7f7fd5, #86a8e7, #91eae4);
+
 }
 .login-box {
   width: 350px;

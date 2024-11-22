@@ -48,8 +48,8 @@ const handleFileUpload = (res) => {
 
 const emit = defineEmits(['updateUser'])
 const update = () => {
-  if (data.user.role === 'ADMIN') {
-    request.put('/admin/update', data.user).then(res => {
+  if (data.user.role === 'USER') {
+    request.put('/user/update', data.user).then(res => {
       if (res.code === '200') {
         ElMessage.success('保存成功')
         localStorage.setItem('userData', JSON.stringify(data.user))

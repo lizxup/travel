@@ -12,6 +12,7 @@ import com.example.entity.Account;
 import com.example.entity.Admin;
 import com.example.exception.CustomException;
 import com.example.service.AdminService;
+import com.example.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class JWTInterceptor implements HandlerInterceptor {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -47,6 +51,8 @@ public class JWTInterceptor implements HandlerInterceptor {
             //根据用户额角色判断用户类型
             if(RoleEnum.ADMIN.name().equals(role)){
                 account = adminService.selectById(Integer.valueOf(userId));
+            }else if(RoleEnum.USER.name().equals(role)){
+                account = userService.selectById(Integer.valueOf(userId));
             }
         }catch (CustomException e){
             throw new CustomException(ResultCodeEnum.TOKEN_CHECK_ERROR);

@@ -4,7 +4,9 @@ package com.example.controller;
 import com.example.common.Result;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
+import com.example.entity.User;
 import com.example.service.AdminService;
+import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,9 @@ public class WebController {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private UserService userService;
 
     /**
      * 默认请求接口
@@ -34,16 +39,20 @@ public class WebController {
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
             loginAccount = adminService.login(account);
         }
+        else if (RoleEnum.USER.name().equals(account.getRole())) {
+            loginAccount = userService.login(account);
+        }
         return Result.success(loginAccount);
     }
 
     /**
      * 注册
-     * @param account
+     * @param user
      * @return
      */
     @PostMapping("/register")
-    public Result register(@RequestBody Account account) {
+    public Result register(@RequestBody User user) {
+        userService.add(user);
         return Result.success();
     }
 

@@ -20,6 +20,7 @@ const router = createRouter({
         ]
     },
     {path:'/login',component:()=>import('@/views/login.vue')},
+    {path:'/adminlogin',component:()=>import('@/views/AdminLogin.vue')},
     {path:'/register',component:()=>import('@/views/register.vue')},
     {path:'/404',component:()=>import('@/views/404.vue')},
     {path:'/:pathMatch(.*)',redirect:"/404"},

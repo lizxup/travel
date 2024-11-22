@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService {
             user.setPassword(Constants.USER_DEFAULT_PASSWORD);
         }
         user.setRole(RoleEnum.USER.name());
+        user.setAvatar(Constants.DEFAULT_AVATAR);
         if(ObjectUtil.isEmpty(user.getName())){
             user.setName(user.getUsername());
         }

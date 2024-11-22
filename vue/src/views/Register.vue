@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <div class="login-box">
-      <div style="font-weight: bold; font-size: 24px; text-align: center; margin-bottom: 30px; color: #1450aa">注 册</div>
+      <div style="font-weight: bold; font-size: 24px; text-align: center; margin-bottom: 30px; color: #189500">注 册</div>
       <el-form ref="formRef" :model="data.form" :rules="data.rules">
         <el-form-item prop="username">
           <el-input :prefix-icon="User" size="large" v-model="data.form.username" placeholder="请输入账号"></el-input>
@@ -12,13 +12,8 @@
         <el-form-item prop="confirmPassword">
           <el-input show-password :prefix-icon="Lock" size="large" v-model="data.form.confirmPassword" placeholder="请确认密码"></el-input>
         </el-form-item>
-        <el-form-item prop="role">
-          <el-select size="large" v-model="data.form.role">
-            <el-option value="USER" label="用户"></el-option>
-          </el-select>
-        </el-form-item>
         <el-form-item>
-          <el-button size="large" type="primary" style="width: 100%" @click="login">注 册</el-button>
+          <el-button size="large" type="primary" style="width: 100%" @click="register">注 册</el-button>
         </el-form-item>
         <div style="text-align: right">
           已有账号请<a href="/login">登录</a>
@@ -47,7 +42,7 @@ const validatePass = (rule, value, callback) => {
 }
 
 const data = reactive({
-  form: { },
+  form: { role :"USER"},
   rules: {
     username: [
       // trigger: 'blur' 表示失焦校验
@@ -66,7 +61,7 @@ const data = reactive({
 
 
 const formRef = ref()
-const login = () => {
+const register = () => {
   formRef.value.validate(valid => {
     if (valid) { // 表示表单校验通过
       request.post('/register', data.form).then(res => {
