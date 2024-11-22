@@ -4,12 +4,11 @@
     <div class="front-header">
       <div class="front-header-left">
         <img src="@/assets/imgs/logo.jpg" alt="">
-        <div class="title">项目前台</div>
+        <div class="title">旅 游 网</div>
       </div>
       <div class="front-header-center">
         <el-menu :default-active="router.currentRoute.value.path" router mode="horizontal">
           <el-menu-item index="/front/home">首页</el-menu-item>
-          <el-menu-item index="/front/person">个人中心</el-menu-item>
         </el-menu>
       </div>
       <div class="front-header-right">
@@ -26,6 +25,8 @@
 
             <template #dropdown>
               <el-dropdown-menu>
+                <el-dropdown-item @click="router.push('/front/password')">修改密码</el-dropdown-item>
+                <el-dropdown-item @click="goPage('/front/person')">个人信息</el-dropdown-item>
                 <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </template>
@@ -56,6 +57,10 @@ const logout = ()=>{
 
 const updateUser = ()=>{
   data.user = JSON.parse(localStorage.getItem("userData") || "{}")
+}
+
+const goPage = (path)=>{
+  location.href = path
 }
 
 const loadNotice = () => {
