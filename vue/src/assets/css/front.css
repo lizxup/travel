@@ -38,6 +38,9 @@
     width: 80%;
     margin: 5px auto;
 }
+.main-body{
+    min-height: calc(100vh - 355px)
+}
 
 /*Element-Plus样式覆盖*/
 .el-menu--horizontal {
@@ -49,9 +52,6 @@
 }
 
 .front-notice {
-    padding: 5px 20px;
-    color: #666;
-    font-size: 12px;
     display: flex;
     align-items: center;
 }

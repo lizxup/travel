@@ -8,7 +8,14 @@
         left join user on travels.user_id = user.id
         <where>
             <if test="title != null"> and travels.title like concat('%', #{title}, '%')</if>
+            <if test="status != null"> and travels.status = (#{status})</if>
         </where>
+        <if test = "sort == 'hot'">
+            order by travels.read_count desc
+        </if>
+        <if test = "sort == 'new'">
+            order by travels.id desc
+        </if>
     </select>
 
     <delete id="deleteById">

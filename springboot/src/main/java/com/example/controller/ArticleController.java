@@ -72,6 +72,12 @@ public class ArticleController {
         return Result.success(list);
     }
 
+    @GetMapping("/selectRecommend")
+    public Result selectRecommend() {
+        List<Article> list = articleService.selectRecommend();
+        return Result.success(list);
+    }
+
     /**
      * 分页查询
      */

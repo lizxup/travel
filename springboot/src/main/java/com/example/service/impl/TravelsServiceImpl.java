@@ -1,9 +1,12 @@
 package com.example.service.impl;
 
 import cn.hutool.core.date.DateUtil;
+import com.example.common.enums.RoleEnum;
+import com.example.entity.Account;
 import com.example.entity.Travels;
 import com.example.mapper.TravelsMapper;
 import com.example.service.TravelsService;
+import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +49,10 @@ public class TravelsServiceImpl implements TravelsService {
     }
     @Override
     public PageInfo<Travels> selectPage(Travels travels, Integer pageNum, Integer pageSize) {
+        Account currentUser = TokenUtils.getCurrentUser();
+        if(RoleEnum.USER.name().equals(currentUser.getRole())){
+            travels.setStatus("通过");
+        }
         PageHelper.startPage(pageNum, pageSize);
         List<Travels> list = travelsMapper.selectAll(travels);
         return PageInfo.of(list);

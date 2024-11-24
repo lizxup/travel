@@ -13,7 +13,7 @@
       <el-table stripe :data="data.tableData" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" />
         <el-table-column prop="title" label="标题" show-overflow-tooltip />
-        <el-table-column prop="descr" label="简介" />
+        <el-table-column prop="descr" label="简介" show-overflow-tooltip />
         <el-table-column prop="cover" label="封面">
           <template #default="scope">
             <el-image :src="scope.row.cover" style="width: 50px; height: 50px; border-radius: 5px" :preview-src-list="[scope.row.cover]" preview-teleported></el-image>

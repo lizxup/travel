@@ -23,4 +23,6 @@ public interface ArticleService {
     public List<Article> selectAll(Article article);
 
     public PageInfo<Article> selectPage(Article article, Integer pageNum, Integer pageSize);
+
+    List<Article> selectRecommend();
 }

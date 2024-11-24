@@ -52,4 +52,10 @@ public class ArticleServiceImpl implements ArticleService {
         List<Article> list = articleMapper.selectAll(article);
         return PageInfo.of(list);
     }
+
+    @Override
+    public List<Article> selectRecommend() {
+        List<Article> list = articleMapper.selectRecommend();
+        return list;
+    }
 }

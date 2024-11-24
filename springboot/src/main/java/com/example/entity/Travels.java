@@ -21,6 +21,16 @@ public class Travels {
 
     private String username;
 
+    private String sort;
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
+
     public String getUsername() {
         return username;
     }

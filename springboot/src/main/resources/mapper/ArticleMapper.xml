@@ -10,6 +10,10 @@
         </where>
     </select>
 
+    <select id="selectRecommend" resultType="com.example.entity.Article">
+        select * from `article` order by read_count desc limit 3
+    </select>
+
     <delete id="deleteById">
         delete from `article`
         where id = #{id}

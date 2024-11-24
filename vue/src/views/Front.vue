@@ -1,10 +1,17 @@
 <template>
   <div>
-    <div class="front-notice"><el-icon><Bell/></el-icon>公告：{{ data.top }}</div>
+<!--    <div class="front-notice"><el-icon><Bell/></el-icon>公告：{{ data.top }}</div>-->
+    <div class="front-notice">
+      <div style="padding-left: 20px ; flex:1">
+        <i style="font-size: 17px;color:#189500; ">走吧！！！我们一起去看看不一样的世界！</i>
+      </div>
+      <iframe scrolling="no" src="https://widget.tianqiapi.com/?style=tg&skin=pitaya" frameborder="0" width="470" height="40" allowtransparency="true"></iframe>
+    </div>
+
     <div class="front-header">
       <div class="front-header-left">
         <img src="@/assets/imgs/logo.jpg" alt="">
-        <div class="title">旅 游 网</div>
+        <div class="title" @click ="router.push('/front/home')">旅 游 网</div>
       </div>
       <div class="front-header-center">
         <el-menu :default-active="router.currentRoute.value.path" router mode="horizontal">
@@ -37,6 +44,7 @@
     <div class="main-body">
       <RouterView @updateUser='updateUser'/>
     </div>
+    <Footer/>
   </div>
 </template>
 
@@ -44,6 +52,7 @@
 import router from "@/router/index.js";
 import { reactive } from "vue";
 import request from "@/utils/request.js";
+import Footer from "@/views/components/Footer.vue"
 
 const data = reactive({
   user: JSON.parse(localStorage.getItem('userData') || '{}'),

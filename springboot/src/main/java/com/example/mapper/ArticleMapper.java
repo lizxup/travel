@@ -19,4 +19,6 @@ public interface ArticleMapper {
     Article selectById(Integer id);
 
     List<Article> selectAll(Article article);
+
+    List<Article> selectRecommend();
 }

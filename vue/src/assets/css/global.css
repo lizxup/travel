@@ -19,3 +19,39 @@ a{
     padding: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,.1);
 }
+
+
+.top{
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: orange;
+    cursor:pointer;
+    color: white;
+    border-radius: 50%;
+}
+
+.line1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.line2 {
+    word-break: break-all;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* 超出几行省略 */
+    overflow: hidden;
+}
+
+.line3 {
+    word-break: break-all;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* 超出几行省略 */
+    overflow: hidden;
+}
