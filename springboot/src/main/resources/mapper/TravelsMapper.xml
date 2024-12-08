@@ -9,11 +9,12 @@
         <where>
             <if test="title != null"> and travels.title like concat('%', #{title}, '%')</if>
             <if test="status != null"> and travels.status = (#{status})</if>
+            <if test="userId != null"> and travels.user_id = (#{userId})</if>
         </where>
         <if test = "sort == 'hot'">
             order by travels.read_count desc
         </if>
-        <if test = "sort == 'new'">
+        <if test = "sort == 'new' or sort == null">
             order by travels.id desc
         </if>
     </select>
@@ -24,7 +25,7 @@
     </delete>
 
     <!-- insert into travels (username, password, ...) values ('travels', 'travels', ...) -->
-    <insert id="insert" parameterType="com.example.entity.Travels" useGeneratedKeys="true">
+    <insert id="insert" parameterType="com.example.entity.Travels" keyProperty="id" useGeneratedKeys="true">
         insert into `travels`
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>
@@ -50,7 +51,7 @@
             <if test="userId != null">#{userId},</if>
             <if test="time != null">#{time},</if>
             <if test="readCount != null">#{readCount},</if>
-            <if test="startDate != null">#{startCate},</if>
+            <if test="startDate != null">#{startDate},</if>
             <if test="money != null">#{money},</if>
             <if test="days != null">#{days},</if>
             <if test="location != null">#{location},</if>
@@ -100,7 +101,5 @@
         </set>
         where id = #{id}
     </update>
-
-
 
 </mapper>

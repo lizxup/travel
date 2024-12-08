@@ -7,14 +7,13 @@ public class Travels {
     //简介
     private String descr;
     private String content;
-    private String userId;
-
+    private Integer userId;
     //发布时间
     private String time;
-    private String readCount;
+    private Integer readCount;
     private String startDate;
-    private String money;
-    private String days;
+    private Integer money;
+    private Integer days;
     private String location;
     //审核状态
     private String status;
@@ -79,11 +78,11 @@ public class Travels {
         this.content = content;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -95,11 +94,11 @@ public class Travels {
         this.time = time;
     }
 
-    public String getReadCount() {
+    public Integer getReadCount() {
         return readCount;
     }
 
-    public void setReadCount(String readCount) {
+    public void setReadCount(Integer readCount) {
         this.readCount = readCount;
     }
 
@@ -111,19 +110,19 @@ public class Travels {
         this.startDate = startDate;
     }
 
-    public String getMoney() {
+    public Integer getMoney() {
         return money;
     }
 
-    public void setMoney(String money) {
+    public void setMoney(Integer money) {
         this.money = money;
     }
 
-    public String getDays() {
+    public Integer getDays() {
         return days;
     }
 
-    public void setDays(String days) {
+    public void setDays(Integer days) {
         this.days = days;
     }
 

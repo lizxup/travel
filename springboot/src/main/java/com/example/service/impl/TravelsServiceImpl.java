@@ -21,12 +21,21 @@ public class TravelsServiceImpl implements TravelsService {
 
     @Override
     public void add(Travels travels) {
+        travels.setReadCount(0);
         travels.setTime(DateUtil.now());
+        travels.setStatus("待审核");
+        Account account = TokenUtils.getCurrentUser();
+        travels.setUserId(account.getId());
         travelsMapper.insert(travels);
     }
 
     @Override
     public void updateById(Travels travels) {
+        Account currentUser = TokenUtils.getCurrentUser();
+        //用户编辑游记的时候才会更新游记状态设置为待审核
+        if(RoleEnum.USER.name().equals(currentUser.getRole())){
+            travels.setStatus("待审核");
+        }
         travelsMapper.updateById(travels);
     }
     @Override
@@ -51,8 +60,23 @@ public class TravelsServiceImpl implements TravelsService {
     public PageInfo<Travels> selectPage(Travels travels, Integer pageNum, Integer pageSize) {
         Account currentUser = TokenUtils.getCurrentUser();
         if(RoleEnum.USER.name().equals(currentUser.getRole())){
-            travels.setStatus("通过");
+            travels.setUserId(currentUser.getId());
         }
+        PageHelper.startPage(pageNum, pageSize);
+        List<Travels> list = travelsMapper.selectAll(travels);
+        return PageInfo.of(list);
+    }
+
+    /**
+     * 只查询用户可见的游记
+     * @param travels
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public PageInfo<Travels> selectFrontPage(Travels travels, Integer pageNum, Integer pageSize) {
+        travels.setStatus("通过");
         PageHelper.startPage(pageNum, pageSize);
         List<Travels> list = travelsMapper.selectAll(travels);
         return PageInfo.of(list);

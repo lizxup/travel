@@ -20,4 +20,6 @@ public interface TravelsService {
     public List<Travels> selectAll(Travels travels);
 
     public PageInfo<Travels> selectPage(Travels travels, Integer pageNum, Integer pageSize);
+
+    public PageInfo<Travels> selectFrontPage(Travels travels, Integer pageNum, Integer pageSize);
 }

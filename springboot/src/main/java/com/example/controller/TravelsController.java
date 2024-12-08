@@ -23,7 +23,7 @@ public class TravelsController {
     @PostMapping("/add")
     public Result add(@RequestBody Travels travels) {
         travelsService.add(travels);
-        return Result.success();
+        return Result.success(travels);
     }
 
     /**
@@ -79,6 +79,22 @@ public class TravelsController {
                              @RequestParam(defaultValue = "1") Integer pageNum,
                              @RequestParam(defaultValue = "10") Integer pageSize) {
         PageInfo<Travels> pageInfo = travelsService.selectPage(travels, pageNum, pageSize);
+        return Result.success(pageInfo);
+
+    }
+
+    /**
+     * 只查询用户可见的游记
+     * @param travels
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @GetMapping("/selectFrontPage")
+    public Result selectFrontPage(Travels travels,
+                             @RequestParam(defaultValue = "1") Integer pageNum,
+                             @RequestParam(defaultValue = "10") Integer pageSize) {
+        PageInfo<Travels> pageInfo = travelsService.selectFrontPage(travels, pageNum, pageSize);
         return Result.success(pageInfo);
 
     }

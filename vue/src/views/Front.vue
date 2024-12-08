@@ -16,6 +16,7 @@
       <div class="front-header-center">
         <el-menu :default-active="router.currentRoute.value.path" router mode="horizontal">
           <el-menu-item index="/front/home">首页</el-menu-item>
+          <el-menu-item index="">旅游攻略</el-menu-item>
         </el-menu>
       </div>
       <div class="front-header-right">
@@ -32,8 +33,9 @@
 
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item @click="router.push('/front/password')">修改密码</el-dropdown-item>
                 <el-dropdown-item @click="goPage('/front/person')">个人信息</el-dropdown-item>
+                <el-dropdown-item @click="router.push('/front/travels')">我的游记</el-dropdown-item>
+                <el-dropdown-item @click="router.push('/front/password')">修改密码</el-dropdown-item>
                 <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </template>

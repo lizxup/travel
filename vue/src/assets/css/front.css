@@ -42,6 +42,7 @@
     min-height: calc(100vh - 355px)
 }
 
+
 /*Element-Plus样式覆盖*/
 .el-menu--horizontal {
     border: none !important;
@@ -49,6 +50,13 @@
 }
 .el-tooltip__trigger {
     outline: none;
+}
+.el-menu-item.is-active{
+    background-color: #189500 !important;
+    color: white !important;
+}
+.el-menu-item:hover{
+    border-bottom: 2px solid #189500;
 }
 
 .front-notice {

@@ -1,14 +1,10 @@
 package com.example.controller;
-
-
 import com.example.common.Result;
-
 import com.example.entity.Article;
 import com.example.service.ArticleService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -35,6 +31,7 @@ public class ArticleController {
         articleService.updateById(article);
         return Result.success();
     }
+
 
     /**
      * 单个删除
@@ -72,6 +69,11 @@ public class ArticleController {
         return Result.success(list);
     }
 
+
+    /**
+     *
+     * @return
+     */
     @GetMapping("/selectRecommend")
     public Result selectRecommend() {
         List<Article> list = articleService.selectRecommend();
@@ -87,6 +89,5 @@ public class ArticleController {
                              @RequestParam(defaultValue = "10") Integer pageSize) {
         PageInfo<Article> pageInfo = articleService.selectPage(article, pageNum, pageSize);
         return Result.success(pageInfo);
-
     }
 }

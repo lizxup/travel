@@ -13,7 +13,7 @@
           <div class ='item' :class="{'active':data.sort === 'hot'}" @click = "loadBySort('hot')">热门游记</div>
           <div class ='item' :class="{'active':data.sort === 'new'}" @click = "loadBySort('new')">最近发表</div>
           <div style="flex: 1;text-align: right">
-            <el-button type = primary style="Padding:10px 30px">
+            <el-button @click = "goPage('/front/addTravel')"type = primary style="Padding:10px 30px" >
               <el-icon>
                 <Edit/>
               </el-icon>
@@ -114,11 +114,17 @@ const loadBySort = (sort)=>{
   loadTravels();
 
 }
+
+const goPage =(path)=>{
+  location.href = path
+}
 const top = (id)=>{
 
 }
+
+
 const loadTravels=()=>{
-  request.get('/travels/selectPage', {
+  request.get('/travels/selectFrontPage', {
     params: {
       pageNum: data.pageNum,
       pageSize: data.pageSize,

@@ -7,10 +7,12 @@ import com.example.entity.Account;
 import com.example.entity.User;
 import com.example.service.AdminService;
 import com.example.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Slf4j
 public class WebController {
 
 
@@ -35,6 +37,7 @@ public class WebController {
      */
     @PostMapping("/login")
     public Result login(@RequestBody Account account) {
+        log.info("登录:{}",account);
         Account loginAccount = null;
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
             loginAccount = adminService.login(account);
