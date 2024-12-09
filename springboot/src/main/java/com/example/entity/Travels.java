@@ -21,6 +21,25 @@ public class Travels {
     private String username;
 
     private String sort;
+    private String userAvatar;
+
+    private Integer praiseCount = 0;
+
+    public Integer getPraiseCount() {
+        return praiseCount;
+    }
+
+    public void setPraiseCount(Integer praiseCount) {
+        this.praiseCount = praiseCount;
+    }
+
+    public String getUserAvatar() {
+        return userAvatar;
+    }
+
+    public void setUserAvatar(String userAvatar) {
+        this.userAvatar = userAvatar;
+    }
 
     public String getSort() {
         return sort;

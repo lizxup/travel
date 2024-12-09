@@ -56,6 +56,15 @@ public class TravelsServiceImpl implements TravelsService {
     public List<Travels> selectAll(Travels travels) {
         return travelsMapper.selectAll(travels);
     }
+
+
+    /**
+     * 游记所有者可见
+     * @param travels
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @Override
     public PageInfo<Travels> selectPage(Travels travels, Integer pageNum, Integer pageSize) {
         Account currentUser = TokenUtils.getCurrentUser();
@@ -68,7 +77,7 @@ public class TravelsServiceImpl implements TravelsService {
     }
 
     /**
-     * 只查询用户可见的游记
+     * 所有用户可见的游记
      * @param travels
      * @param pageNum
      * @param pageSize
@@ -80,5 +89,10 @@ public class TravelsServiceImpl implements TravelsService {
         PageHelper.startPage(pageNum, pageSize);
         List<Travels> list = travelsMapper.selectAll(travels);
         return PageInfo.of(list);
+    }
+
+    @Override
+    public void updateReadCount(Integer id) {
+        travelsMapper.updateReadCount(id);
     }
 }

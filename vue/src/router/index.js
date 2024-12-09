@@ -33,7 +33,8 @@ const router = createRouter({
         {path: "person", component:()=>import("@/views/front/Person.vue"),},
         {path: "password", component:()=>import("@/views/front/Password.vue"),},
         {path: "addTravel", component:()=>import("@/views/front/AddTravel.vue"),},
-        {path: "travels", component:()=>import("@/views/front/travels.vue"),},
+        {path: "travels", component:()=>import("@/views/front/Travels.vue"),},
+        {path: "travelDetail", component:()=>import("@/views/front/TravelDetail.vue"),},
 
       ]
     },

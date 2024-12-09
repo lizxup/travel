@@ -26,14 +26,14 @@
             <div style = "display: flex ;grid-gap: 20px">
               <img :src="item.cover" alt=""  style="width: 180px;height: 150px;border: 5px"/>
               <div style="flex: 1;">
-                <a :href="'/front/travelDatail?id=' + item.id"><div class = "title line1"> {{item.title}}</div></a>
+                <a :href="'/front/travelDetail?id=' + item.id"><div class = "title line1"> {{item.title}}</div></a>
                 <div style="color: #666;margin:20px 0;text-align: justify ; height: 55px" class="line3">{{item.descr}}</div>
                 <div style="color: #666; display: flex;align-items: center" >
                   <span style="margin-right: 20px"><el-icon size="14" style="top: 2px"><Location></Location></el-icon>{{item.location}}</span>
                   <span style="margin-right: 20px">By.{{item.username}}</span>
                   <span style="margin-right: 20px"><el-icon size="14" style="top: 2px"><View/></el-icon>{{item.readCount}}</span>
                   <span style="margin-right: 20px"><el-icon size="14" style="top: 2px"><Clock/></el-icon>{{item.time}}</span>
-                  <strong style="color: orange; font-size: 20px;margin-right: 5px">12</strong>
+                  <strong style="color: orange; font-size: 20px;margin-right: 5px">{{ item.praiseCount }}</strong>
                   <div class = 'top' @click="top(item)">顶</div>
                 </div>
               </div>

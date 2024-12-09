@@ -98,4 +98,10 @@ public class TravelsController {
         return Result.success(pageInfo);
 
     }
+
+    @PutMapping("/updateReadCount/{id}")
+    public Result updateReadCount(@PathVariable Integer id){
+        travelsService.updateReadCount(id);
+        return Result.success();
+    }
 }
