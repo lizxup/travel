@@ -40,6 +40,7 @@ import router from "@/router/index.js";
 import request from "@/utils/request.js";
 
 const data = reactive({
+  user: JSON.parse(localStorage.getItem('userData') || '{}'),
   id: router.currentRoute.value.query.id,
   travel: {}
 })
@@ -55,7 +56,14 @@ const load = () => {
 }
 
 const top = (id) => {
-
+  request.post("/praise/add",{fid:data.id,userId:data.user.id}).then(res=>{
+    if(res.code === '200'){
+      ElMessage.success('操作成功')
+      load()
+    }else{
+      ElMessage.error(res.msg)
+    }
+  })
 }
 
 </script>

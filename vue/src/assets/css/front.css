@@ -39,7 +39,7 @@
     margin: 5px auto;
 }
 .main-body{
-    min-height: calc(100vh - 355px)
+    min-height: calc(100vh - 100px)
 }
 
 

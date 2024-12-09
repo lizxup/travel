@@ -23,5 +23,7 @@ public interface TravelsService {
 
     public PageInfo<Travels> selectFrontPage(Travels travels, Integer pageNum, Integer pageSize);
 
-    void updateReadCount(Integer id);
+    public void updateReadCount(Integer id);
+
+
 }

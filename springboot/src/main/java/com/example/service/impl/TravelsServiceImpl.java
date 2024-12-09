@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
 import com.example.entity.Travels;
+import com.example.mapper.PraiseMapper;
 import com.example.mapper.TravelsMapper;
 import com.example.service.TravelsService;
 import com.example.utils.TokenUtils;
@@ -18,6 +19,9 @@ import java.util.List;
 public class TravelsServiceImpl implements TravelsService {
     @Autowired
     private TravelsMapper travelsMapper;
+
+    @Autowired
+    private PraiseMapper praiseMapper;
 
     @Override
     public void add(Travels travels) {
@@ -50,7 +54,9 @@ public class TravelsServiceImpl implements TravelsService {
     }
     @Override
     public Travels selectById(Integer id) {
-        return travelsMapper.selectById(id);
+        Travels travels = travelsMapper.selectById(id);
+        setTravelData(travels);
+        return travels;
     }
     @Override
     public List<Travels> selectAll(Travels travels) {
@@ -88,11 +94,18 @@ public class TravelsServiceImpl implements TravelsService {
         travels.setStatus("通过");
         PageHelper.startPage(pageNum, pageSize);
         List<Travels> list = travelsMapper.selectAll(travels);
+        for(Travels t:list){
+            setTravelData(t);
+        }
         return PageInfo.of(list);
     }
 
     @Override
     public void updateReadCount(Integer id) {
         travelsMapper.updateReadCount(id);
+    }
+
+    private void setTravelData(Travels travels){
+        travels.setPraiseCount(praiseMapper.selectCount(travels.getId()));
     }
 }

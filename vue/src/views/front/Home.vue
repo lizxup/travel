@@ -34,7 +34,7 @@
                   <span style="margin-right: 20px"><el-icon size="14" style="top: 2px"><View/></el-icon>{{item.readCount}}</span>
                   <span style="margin-right: 20px"><el-icon size="14" style="top: 2px"><Clock/></el-icon>{{item.time}}</span>
                   <strong style="color: orange; font-size: 20px;margin-right: 5px">{{ item.praiseCount }}</strong>
-                  <div class = 'top' @click="top(item)">顶</div>
+                  <div class = 'top' @click="top(item.id)">顶</div>
                 </div>
               </div>
             </div>
@@ -90,6 +90,7 @@ import request from "@/utils/request.js";
 
 
 const data = reactive({
+  user: JSON.parse(localStorage.getItem('userData') || '{}'),
   imgs:[img1,img2,img3],
   sort : "hot",
   pageNum : 1,
@@ -98,7 +99,6 @@ const data = reactive({
   travelList : [],
   articleList:[],
   noticeList:[]
-
 })
 request.get('/article/selectRecommend').then(res =>{
   data.articleList = res.data
@@ -118,10 +118,16 @@ const loadBySort = (sort)=>{
 const goPage =(path)=>{
   location.href = path
 }
-const top = (id)=>{
-
+const top = (id) => {
+  request.post("/praise/add",{fid: id,userId: data.user.id}).then(res=>{
+    if(res.code === '200'){
+      ElMessage.success('操作成功')
+      loadTravels();
+    }else{
+      ElMessage.error(res.msg)
+    }
+  })
 }
-
 
 const loadTravels=()=>{
   request.get('/travels/selectFrontPage', {
