@@ -31,6 +31,9 @@
     <div style="margin: 30px 0">
       <div v-html="data.travel.content"></div>
     </div>
+
+    <!--引用评论组件-->
+    <Comment />
   </div>
 </template>
 
@@ -38,6 +41,7 @@
 import {reactive} from "vue";
 import router from "@/router/index.js";
 import request from "@/utils/request.js";
+import Comment from "@/views/components/Comment.vue"
 
 const data = reactive({
   user: JSON.parse(localStorage.getItem('userData') || '{}'),

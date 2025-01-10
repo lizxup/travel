@@ -1,7 +1,5 @@
 package com.example.controller;
 import com.example.common.Result;
-import com.example.common.enums.RoleEnum;
-import com.example.entity.Account;
 import com.example.entity.Admin;
 import com.example.service.impl.AdminServiceImpl;
 import com.github.pagehelper.PageInfo;
@@ -16,7 +14,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/admin")
-public class AdminCotroller {
+public class AdminController {
     @Autowired
     private AdminServiceImpl adminService;
 

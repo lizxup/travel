@@ -17,6 +17,7 @@ const router = createRouter({
         {path: "routes", meta:{name:"旅游路线"} , component:()=>import("@/views/manager/Routes.vue"),},
         {path: "travels", meta:{name:"游记信息"} , component:()=>import("@/views/manager/Travels.vue"),},
         {path: "user", meta:{name:"用户管理"} , component:()=>import("@/views/manager/User.vue"),},
+        {path: "comment", meta:{name:"评论信息"} , component:()=>import("@/views/manager/Comment.vue"),},
         ]
     },
     {path:'/login',component:()=>import('@/views/login.vue')},
